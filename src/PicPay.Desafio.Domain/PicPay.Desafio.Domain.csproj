@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BoundedContext\" />
+    <Compile Remove="BoundedContext\**" />
+    <EmbeddedResource Remove="BoundedContext\**" />
+    <None Remove="BoundedContext\**" />
   </ItemGroup>
 
 </Project>

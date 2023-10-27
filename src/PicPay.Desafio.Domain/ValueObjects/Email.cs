@@ -1,16 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PicPay.Desafio.Domain.ValueObjects
 {
     public class Email
     {
+        public string Endereco { get; }
+        
         public Email(string email)
         {
+            //TODO: Validação usando Regex
 
+            Endereco = email;
         }
     }
 }
