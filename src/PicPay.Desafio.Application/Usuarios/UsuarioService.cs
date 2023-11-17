@@ -1,6 +1,6 @@
 using PicPay.Desafio.Domain.ValueObjects;
 
-namespace PicPay.Desafio.Application.Services.Usuario
+namespace PicPay.Desafio.Application.Usuarios
 {
     public class UsuarioService : IUsuarioService
     {
@@ -13,9 +13,11 @@ namespace PicPay.Desafio.Application.Services.Usuario
 
         public Dinheiro ObterSaldo(string emailUsuario)
         {
-            var usuario = _usuarioRepository.ObterUsuarioByEmail(emailUsuario);
-            return usuario.Saldo;
+            var usuarioDto = _usuarioRepository.ObterUsuarioByEmail(emailUsuario);
+            var saldo = _usuarioRepository.ObterSaldo(usuarioDto.Id);
+
+            return saldo;
         }
-        
+
     }
 }

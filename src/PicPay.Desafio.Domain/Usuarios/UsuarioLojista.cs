@@ -1,6 +1,6 @@
 using PicPay.Desafio.Domain.ValueObjects;
 
-namespace PicPay.Desafio.Domain.Entidades
+namespace PicPay.Desafio.Domain.Usuarios
 {
     public class UsuarioLojista : Usuario
     {

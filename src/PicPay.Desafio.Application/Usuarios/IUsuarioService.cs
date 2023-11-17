@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PicPay.Desafio.Domain.ValueObjects;
 
-namespace PicPay.Desafio.Application.Services.Usuario
+namespace PicPay.Desafio.Application.Usuarios
 {
-	public interface IUsuarioService
-	{
+    public interface IUsuarioService
+    {
         //public UsuarioDto ObterUsuarioByEmail(string email);
 
         /// <summary>
@@ -16,5 +11,5 @@ namespace PicPay.Desafio.Application.Services.Usuario
         /// </summary>
         public Dinheiro ObterSaldo(string emailUsuario);
 
-	}
+    }
 }

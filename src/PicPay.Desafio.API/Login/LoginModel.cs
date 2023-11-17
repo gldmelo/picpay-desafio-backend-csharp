@@ -1,5 +1,4 @@
-
-namespace PicPay.Desafio.API.Code.Login
+namespace PicPay.Desafio.API.Login
 {
     public class LoginModel
     {

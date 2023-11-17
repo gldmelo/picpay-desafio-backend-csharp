@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using PicPay.Desafio.Infra.Login;
-using PicPay.Desafio.Infra.Usuario;
+using PicPay.Desafio.Infra.Shared;
+using PicPay.Desafio.Infra.Usuarios;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+// Inicialização dos Serviços
+builder.Services.ConfigurarBancoDados();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer();
 
 builder.Services.ConfigureOptions<JwtOptionsSetup>();

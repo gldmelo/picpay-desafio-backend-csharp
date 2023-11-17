@@ -1,5 +1,5 @@
 
-namespace PicPay.Desafio.API.Code.UsuarioController
+namespace PicPay.Desafio.API.Usuarios
 {
     public class SaldoRequest
     {

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PicPay.Desafio.Infra.Login;
 
-namespace PicPay.Desafio.API.Code.Login
+namespace PicPay.Desafio.API.Login
 {
     public class LoginController : ControllerBase
     {

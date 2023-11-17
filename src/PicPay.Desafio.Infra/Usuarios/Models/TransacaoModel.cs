@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
 
-namespace PicPay.Desafio.Infra.Models;
+namespace PicPay.Desafio.Infra.Usuarios.Models;
 
-public partial class Transacao
+public partial class TransacaoModel
 {
     public int IdTransacao { get; set; }
 
@@ -19,5 +17,4 @@ public partial class Transacao
 
     public short Status { get; set; }
 
-    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
 }

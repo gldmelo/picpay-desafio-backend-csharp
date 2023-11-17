@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PicPay.Desafio.Application.Services.Usuario;
+using PicPay.Desafio.Application.Usuarios;
 
-namespace PicPay.Desafio.API.Code.UsuarioController
+namespace PicPay.Desafio.API.Usuarios
 {
     [Authorize]
     public class SaldoController : ControllerBase
