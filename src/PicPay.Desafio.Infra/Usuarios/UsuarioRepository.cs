@@ -15,6 +15,15 @@ namespace PicPay.Desafio.Infra.Usuarios
             _sqlConnectionFactory = sqlConnectionFactory;
         }
 
+        public int ObterIdUsuarioByEmail(string emailUsuario)
+        {
+            using (var conn = _sqlConnectionFactory.Create())
+            {
+                return conn.QuerySingle<int>("select id_usuario from Usuario where email = @Email",
+                    param: new { Email = emailUsuario });
+            }
+        }
+
         public UsuarioDto ObterUsuarioByEmail(string emailUsuario)
         {
             UsuarioModel usuarioModel;

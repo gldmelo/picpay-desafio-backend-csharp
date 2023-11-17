@@ -18,9 +18,10 @@ namespace PicPay.Desafio.API.Usuarios
         [Produces("application/json")]
         [HttpGet]
         [Authorize]
-        public IActionResult ObterSaldo([FromHeader] SaldoRequest req)
+        public IActionResult ObterSaldo()
         {
-            var saldoUsuario = _usuarioService.ObterSaldo(req.Email);
+            var idUsuarioClaim = User.FindFirst("sub")!.Value;
+            var saldoUsuario = _usuarioService.ObterSaldo(int.Parse(idUsuarioClaim));
 
             var response = new SaldoResponse
             {

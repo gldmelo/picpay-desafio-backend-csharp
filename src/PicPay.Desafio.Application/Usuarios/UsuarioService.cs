@@ -11,10 +11,10 @@ namespace PicPay.Desafio.Application.Usuarios
             _usuarioRepository = usuarioRepository;
         }
 
-        public Dinheiro ObterSaldo(string emailUsuario)
+        public Dinheiro ObterSaldo(int idUsuario)
         {
-            var usuarioDto = _usuarioRepository.ObterUsuarioByEmail(emailUsuario);
-            var saldo = _usuarioRepository.ObterSaldo(usuarioDto.Id);
+            //var usuarioDto = _usuarioRepository.ObterUsuarioByEmail(emailUsuario);
+            var saldo = _usuarioRepository.ObterSaldo(idUsuario);
 
             return saldo;
         }

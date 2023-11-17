@@ -1,12 +1,15 @@
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using PicPay.Desafio.Infra.Login;
 using PicPay.Desafio.Infra.Shared;
+using PicPay.Desafio.Infra.Transacoes;
 using PicPay.Desafio.Infra.Usuarios;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Inicialização dos Serviços
 builder.Services.ConfigurarBancoDados();
+JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer();
 
@@ -21,6 +24,7 @@ builder.Services.AddSwaggerGen();
 
 // Custom
 builder.Services.ConfigurarUsuarioServices();
+builder.Services.ConfigurarTransacaoServices();
 builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 
 var app = builder.Build();
