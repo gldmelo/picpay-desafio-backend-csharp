@@ -17,18 +17,16 @@ namespace PicPay.Desafio.API.Usuarios
         [Produces("application/json")]
         [HttpGet]
         [Authorize]
-        public IActionResult EnviarDinheiro([FromHeader] TransacaoRequest req)
+        public IActionResult EnviarDinheiro([FromBody] TransacaoRequest req)
         {
             var idUsuarioClaim = int.Parse(User.FindFirst("sub")!.Value);
             var transacaoDto = new TransacaoDto { IdRemetente = idUsuarioClaim, EmailDestinatario = req.EmailDestinatario, Quantia = req.Quantia, Moeda = req.Moeda };
 
-            // criar projeto p/ Mock de autorizaçdão
-            // criar projeto p/ Mock de envio de notificação
-            _transacaoService.EnviarDinheiro(transacaoDto);
+            var resultado = _transacaoService.EnviarDinheiro(transacaoDto);
             
             var response = new TransacaoResponse
             {
-                Status = "Você enviou dinheiro"
+                Status = resultado.IsSuccess ? "Você enviou dinheiro" : resultado.Errors[0].Message,
             };
 
             return Ok();

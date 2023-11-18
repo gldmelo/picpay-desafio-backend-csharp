@@ -1,12 +1,13 @@
+using FluentResults;
 
 namespace PicPay.Desafio.Domain.ValueObjects
 {
-    public class Dinheiro
+    public struct Dinheiro
     {
         public decimal Quantia { get; }
         public string Moeda { get; set; }
 
-        public Dinheiro(decimal quantia) : this(quantia, "R$") { }
+        public Dinheiro(decimal quantia) : this(quantia, "BRL") { }
 
         public Dinheiro(decimal quantia, string moeda)
         {
@@ -17,12 +18,45 @@ namespace PicPay.Desafio.Domain.ValueObjects
             Moeda = moeda;
         }
 
-        public static Dinheiro operator + (Dinheiro d1, Dinheiro d2)
+        public static Result<Dinheiro> operator + (Dinheiro d1, Dinheiro d2)
         {
             if (d1.Moeda != d2.Moeda)
                 throw new Exception("Não é possível somar dinheiro de moedas diferentes");
 
             return new Dinheiro(d1.Quantia + d2.Quantia, d1.Moeda);
         }
+
+        public static bool operator < (Dinheiro d1, Dinheiro d2)
+        {
+            if (d1.Moeda != d2.Moeda)
+                throw new Exception("Não é possível comparar dinheiro de moedas diferentes");
+
+            return d1.Quantia < d2.Quantia;
+        }
+
+        public static bool operator > (Dinheiro d1, Dinheiro d2)
+        {
+            if (d1.Moeda != d2.Moeda)
+                throw new Exception("Não é possível comparar dinheiro de moedas diferentes");
+
+            return d1.Quantia > d2.Quantia;
+        }
+
+        public static bool operator <= (Dinheiro d1, Dinheiro d2)
+        {
+            if (d1.Moeda != d2.Moeda)
+                throw new Exception("Não é possível comparar dinheiro de moedas diferentes");
+
+            return d1.Quantia <= d2.Quantia;
+        }
+
+        public static bool operator >= (Dinheiro d1, Dinheiro d2)
+        {
+            if (d1.Moeda != d2.Moeda)
+                throw new Exception("Não é possível comparar dinheiro de moedas diferentes");
+
+            return d1.Quantia >= d2.Quantia;
+        }
+
     }
 }

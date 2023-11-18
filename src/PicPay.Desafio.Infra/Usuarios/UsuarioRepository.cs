@@ -24,6 +24,19 @@ namespace PicPay.Desafio.Infra.Usuarios
             }
         }
 
+        public UsuarioDto ObterUsuarioById(int idUsuario)
+        {
+            UsuarioModel usuarioModel;
+
+            using (var conn = _sqlConnectionFactory.Create())
+            {
+                usuarioModel = conn.QuerySingle<UsuarioModel>("select id_usuario, email, nome_completo, senha, tipo, documento from Usuario where id_usuario = @Id",
+                    param: new { Id = idUsuario });
+            }
+
+            return usuarioModel.ConvertToDto();
+        }
+
         public UsuarioDto ObterUsuarioByEmail(string emailUsuario)
         {
             UsuarioModel usuarioModel;
@@ -39,8 +52,8 @@ namespace PicPay.Desafio.Infra.Usuarios
 
         public Dinheiro ObterSaldo(int idUsuario)
         {
-            var sql = @"select (select sum(quantia) from Transacao where moeda = 'BRL' and id_usuario = @Id and tipo_operacao = 0)
-                        - (select sum(quantia) from Transacao where moeda = 'BRL' and id_usuario = @Id and tipo_operacao = 1)";
+            var sql = @"select (select sum(quantia) from Transacao where moeda = 'BRL' and id_usuario = @Id and tipo_operacao = 1)
+                        - (select sum(quantia) from Transacao where moeda = 'BRL' and id_usuario = @Id and tipo_operacao = 0)";
 
             using (var conn = _sqlConnectionFactory.Create())
             {

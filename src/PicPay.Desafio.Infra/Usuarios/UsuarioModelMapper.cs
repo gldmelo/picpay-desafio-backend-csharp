@@ -17,6 +17,7 @@ namespace PicPay.Desafio.Infra.Usuarios
                 Email = usuarioModel.Email,
                 NomeCompleto = usuarioModel.Nome_completo,
                 Tipo = usuarioModel.Tipo,
+                Documento = usuarioModel.Documento,
             };
 
             return usuario;

@@ -13,7 +13,6 @@ namespace PicPay.Desafio.Application.Usuarios
 
         public Dinheiro ObterSaldo(int idUsuario)
         {
-            //var usuarioDto = _usuarioRepository.ObterUsuarioByEmail(emailUsuario);
             var saldo = _usuarioRepository.ObterSaldo(idUsuario);
 
             return saldo;
