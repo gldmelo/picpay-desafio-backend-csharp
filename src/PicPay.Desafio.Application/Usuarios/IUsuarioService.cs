@@ -1,3 +1,4 @@
+using FluentResults;
 using PicPay.Desafio.Domain.ValueObjects;
 
 namespace PicPay.Desafio.Application.Usuarios
@@ -7,7 +8,6 @@ namespace PicPay.Desafio.Application.Usuarios
         /// <summary>
         /// Obtém o saldo do usuário
         /// </summary>
-        public Dinheiro ObterSaldo(int idUsuario);
-
+        public Result<Dinheiro> ObterSaldo(int idUsuario);
     }
 }

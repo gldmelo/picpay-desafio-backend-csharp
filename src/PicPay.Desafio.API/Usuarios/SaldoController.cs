@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PicPay.Desafio.API.Usuarios.Models;
 using PicPay.Desafio.Application.Usuarios;
 
 namespace PicPay.Desafio.API.Usuarios
 {
-    [Authorize]
     public class SaldoController : ControllerBase
     {
         IUsuarioService _usuarioService;
@@ -21,10 +21,15 @@ namespace PicPay.Desafio.API.Usuarios
         public IActionResult ObterSaldo()
         {
             var idUsuarioClaim = User.FindFirst("sub")!.Value;
-            var saldoUsuario = _usuarioService.ObterSaldo(int.Parse(idUsuarioClaim));
+            var saldoResult = _usuarioService.ObterSaldo(int.Parse(idUsuarioClaim));
 
+            if (saldoResult.IsFailed)
+                return Problem(saldoResult.Errors.First().Message);
+
+            var saldoUsuario = saldoResult.Value;
             var response = new SaldoResponse
             {
+                Mensagem = $"Saldo atual em {DateTime.Now}",
                 Saldo = saldoUsuario.Quantia,
                 Moeda = saldoUsuario.Moeda
             };

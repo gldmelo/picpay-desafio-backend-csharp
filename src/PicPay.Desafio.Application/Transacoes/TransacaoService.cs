@@ -33,5 +33,17 @@ namespace PicPay.Desafio.Application.Transacoes
                 ? Result.Ok()
                 : Result.Fail("Erro ao enviar dinheiro! Falha no envio!");
         }
+
+        public Result DepositarDinheiro(TransacaoDto transacaoDto)
+        {
+            var usuarioDepositante = UsuarioDtoMapper.ConvertToDomain(_usuarioRepository.ObterUsuarioById(transacaoDto.IdRemetente));
+
+            var dinheiroADepositar = new Dinheiro(transacaoDto.Quantia, transacaoDto.Moeda);
+            var resultEnviarDinheiro = _transacaoAggregate.DepositarDinheiro(usuarioDepositante, dinheiroADepositar);
+
+            return resultEnviarDinheiro.IsSuccess
+                ? Result.Ok()
+                : Result.Fail(resultEnviarDinheiro.Errors[0]);
+        }
     }
 }

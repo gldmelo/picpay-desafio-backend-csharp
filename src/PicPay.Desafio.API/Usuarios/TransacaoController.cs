@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PicPay.Desafio.API.Usuarios.Models;
 using PicPay.Desafio.Application.Transacoes;
 
 namespace PicPay.Desafio.API.Usuarios
@@ -22,14 +23,16 @@ namespace PicPay.Desafio.API.Usuarios
             var idUsuarioClaim = int.Parse(User.FindFirst("sub")!.Value);
             var transacaoDto = new TransacaoDto { IdRemetente = idUsuarioClaim, EmailDestinatario = req.EmailDestinatario, Quantia = req.Quantia, Moeda = req.Moeda };
 
-            var resultado = _transacaoService.EnviarDinheiro(transacaoDto);
-            
-            var response = new TransacaoResponse
-            {
-                Status = resultado.IsSuccess ? "Você enviou dinheiro" : resultado.Errors[0].Message,
-            };
+            var transacaoResult = _transacaoService.EnviarDinheiro(transacaoDto);
 
-            return Ok();
+            if (transacaoResult.IsFailed)
+                return Problem(transacaoResult.Errors.First().Message);
+
+            var mensagemRetorno = transacaoResult.IsSuccess
+                        ? "Você enviou dinheiro"
+                        : transacaoResult.Errors.First().Message;
+
+            return Ok(new DepositoResponse { Mensagem = mensagemRetorno });
         }
     }
 }

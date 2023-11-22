@@ -5,6 +5,11 @@ namespace PicPay.Desafio.Application.Usuarios
 {
     public static class UsuarioDtoMapper
     {
+        public static Domain.Usuarios.Usuario ConvertToDomain(this UsuarioDto usuarioDto)
+        {
+            return ConvertToDomain(usuarioDto, new Dinheiro(0));
+        }
+
         public static Domain.Usuarios.Usuario ConvertToDomain(this UsuarioDto usuarioDto, Dinheiro saldo)
         {
             Domain.Usuarios.Usuario usuario = usuarioDto.Tipo switch

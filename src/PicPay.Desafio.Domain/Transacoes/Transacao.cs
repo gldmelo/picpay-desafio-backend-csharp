@@ -13,7 +13,7 @@ namespace PicPay.Desafio.Domain.Transacoes
 
         public enum TipoLancamentoExtrato
         {
-            Depósito = 1,
+            Deposito = 1,
             Saque = 2,
             Envio = 3,
             Recebimento = 4,
@@ -38,6 +38,23 @@ namespace PicPay.Desafio.Domain.Transacoes
             {
                 TransacaoItem.OperacaoEnviarDinheiro(remetente.Id, dataOperacao, quantiaATransferir),
                 TransacaoItem.OperacaoReceberDinheiro(destinatario.Id, dataOperacao, quantiaATransferir)
+            };
+
+            return _transacaoRepository.RegistrarTransacao(operacoes);
+        }
+
+        public Result DepositarDinheiro(Usuario usuarioDepositante, Dinheiro dinheiroADepositar)
+        {
+            if (dinheiroADepositar.Quantia <= 0)
+                return Result.Fail("A quantia a depositar deve ser um valor positivo maior que zero.");
+
+            if (dinheiroADepositar.Moeda != "BRL")
+                return Result.Fail("Só são aceitos depósitos em reais.");
+
+            var dataOperacao = DateTime.Now;
+            var operacoes = new List<TransacaoItem>
+            {
+                TransacaoItem.OperacaoDepositarDinheiro(usuarioDepositante.Id, dataOperacao, dinheiroADepositar),
             };
 
             return _transacaoRepository.RegistrarTransacao(operacoes);

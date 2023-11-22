@@ -5,5 +5,6 @@ namespace PicPay.Desafio.Application.Transacoes
     public interface ITransacaoService
     {
         Result EnviarDinheiro(TransacaoDto transacao);
+        Result DepositarDinheiro(TransacaoDto transacaoDeposito);
     }
 }

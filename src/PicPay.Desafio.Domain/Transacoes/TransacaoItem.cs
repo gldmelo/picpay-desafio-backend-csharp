@@ -29,5 +29,10 @@ namespace PicPay.Desafio.Domain.Transacoes
         {
             return new TransacaoItem(idUsuario, dataTransacao, true, TipoLancamentoExtrato.Recebimento, quantia);
         }
+
+        public static TransacaoItem OperacaoDepositarDinheiro(int idUsuario, DateTime dataTransacao, Dinheiro quantia)
+        {
+            return new TransacaoItem(idUsuario, dataTransacao, true, TipoLancamentoExtrato.Deposito, quantia);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using FluentResults;
 using PicPay.Desafio.Domain.ValueObjects;
 
 namespace PicPay.Desafio.Application.Usuarios
@@ -11,12 +12,10 @@ namespace PicPay.Desafio.Application.Usuarios
             _usuarioRepository = usuarioRepository;
         }
 
-        public Dinheiro ObterSaldo(int idUsuario)
+        public Result<Dinheiro> ObterSaldo(int idUsuario)
         {
             var saldo = _usuarioRepository.ObterSaldo(idUsuario);
-
-            return saldo;
+            return Result.Ok(saldo);
         }
-
     }
 }
