@@ -8,7 +8,7 @@ using PicPay.Desafio.Infra.Usuarios;
 var builder = WebApplication.CreateBuilder(args);
 
 // Inicialização dos Serviços
-builder.Services.ConfigurarBancoDados();
+// builder.Services.ConfigurarBancoDados();
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer();
